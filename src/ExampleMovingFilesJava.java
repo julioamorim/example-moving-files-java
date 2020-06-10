@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -12,6 +13,9 @@ public class ExampleMovingFilesJava {
 		// The first method utilizes Files package for moving
 		moveFile();
 
+		// this method first copies the file to destination and then deletes the
+		// original copy from the source
+		copiesFirstMove();
 	}
 
 	private static void moveFile() {
@@ -35,4 +39,18 @@ public class ExampleMovingFilesJava {
 			System.out.println("Done");
 		}
 	}
+
+	private static void copiesFirstMove() {
+		File file = new File("/Users/julioamorim/Downloads/demo.zip");
+
+		// renaming the file and moving it to a new location
+		if (file.renameTo(new File("/Users/julioamorim/demoo.zip"))) {
+			// if file copied successfully then delete the original file
+			file.delete();
+			System.out.println("File moved successfully");
+		} else {
+			System.out.println("Failed to move the file");
+		}
+	}
+
 }
